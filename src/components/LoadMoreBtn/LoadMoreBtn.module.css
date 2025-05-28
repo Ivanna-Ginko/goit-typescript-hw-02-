@@ -1,0 +1,16 @@
+
+
+.btn {
+    border-radius: 10px;
+    border: 1ps solid grey;
+    font-size: 15px;
+    width: 150px;
+}
+
+.box {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background-color: rgb(179, 179, 241);
+}
