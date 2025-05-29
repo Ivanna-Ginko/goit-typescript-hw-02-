@@ -8,18 +8,21 @@ import ErrorMessage from './components/ErrorMessage/ErrorMessage'
 import toast, { Toaster } from 'react-hot-toast';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn'
 import ImageModal from './components/ImageModal/ImageModal'
+import type { Result } from './App.types';
+
 
 function App() {
 
 
-const [results, setResults] = useState([])
-const [query, setQuery] = useState('')
-const [page, setPage] = useState(1)
+const [results, setResults] = useState<Result[]>([])
+const [query, setQuery] = useState<string>('')
+const [page, setPage] = useState<number>(1)
 const [isLoading, setIsLoading] = useState(false);
-const [totalPages, setTotalPages] = useState ();
+const [totalPages, setTotalPages] = useState <number> (0);
 const [isError, setIsError] = useState (false)
 const [modalIsOpen, setModalIsOpen] = useState(false);
-const [selected, setSelected] = useState (null)
+const [selected, setSelected] = useState <string>("")
+//console.log(totalPages)
 
 function openModal() {
   setModalIsOpen(true);
@@ -29,7 +32,7 @@ function closeModal() {
   setModalIsOpen(false);
 }
 
-const handleClick = (imgUrl) => {
+const handleClick = (imgUrl: string): void => {
   setSelected(imgUrl);
   openModal();
 };
@@ -42,7 +45,10 @@ const handleClick = (imgUrl) => {
             setIsLoading(true);
             const data = await fetchResults(query, page, abortController.signal);
             setResults(prev => [...prev, ...data.results]);
-            setTotalPages(data.total_pages)
+            if(data.total_pages)
+              setTotalPages(data.total_pages)
+            else 
+              setTotalPages(0)
           }
         } catch (error) {
           console.log(error);
@@ -58,7 +64,7 @@ const handleClick = (imgUrl) => {
     }
    }, [query, page])
 
-   const handleChangeQuery = (newQuery) => {
+   const handleChangeQuery = (newQuery: string): void => {
     setQuery(newQuery);
     setResults([]);
     setPage(1);
@@ -75,7 +81,7 @@ const handleClick = (imgUrl) => {
     <ImageModal isOpen={modalIsOpen} onRequestClose={closeModal} selected={selected}/>
     <ImageGallery results = {results} handleClick={handleClick}/>
     {isLoading && <Loader />}
-    {page < totalPages && !isLoading && <LoadMoreBtn nextPage={nextPage} page={page}/>}
+    {page < totalPages && !isLoading && <LoadMoreBtn nextPage={nextPage} />}
 
   </>
   )

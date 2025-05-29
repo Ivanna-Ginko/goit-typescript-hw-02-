@@ -1,6 +1,5 @@
 import Modal from 'react-modal';
-
-
+import { Result } from '../../App.types'
 
 
 const customStyles = {
@@ -16,9 +15,15 @@ const customStyles = {
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
   };
-  Modal.setAppElement(document.getElementById("root"));
+  //Modal.setAppElement(document.getElementById("root"));
 
-  const ImageModal = ({ isOpen, onRequestClose, selected }) => {
+  type Props = {
+    isOpen: boolean;
+    onRequestClose: ()=> void;
+    selected: string;
+  }
+
+  const ImageModal = ({ isOpen, selected, onRequestClose }: Props) => {
   return (
     <div>
       

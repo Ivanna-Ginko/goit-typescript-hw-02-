@@ -1,7 +1,13 @@
 import ImageCard from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css"
+import { Result } from "../../App.types"
 
- const ImageGallery = ({ results, handleClick }) => {
+type Props = {
+  results: Result[];
+  handleClick: (item: string) => void;
+}
+
+ const ImageGallery = ({ results, handleClick }: Props) => {
 
     return(
     <ul className={css.list}>

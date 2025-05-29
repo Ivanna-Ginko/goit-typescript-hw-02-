@@ -1,6 +1,13 @@
 import css from './ImageCard.module.css'
+import { Result } from '../../App.types';
 
-const ImageCard = ({ handleClick, item }) => {
+
+type Props = {
+    item: Result;
+    handleClick: (item: string) => void;
+};
+
+const ImageCard = ({ handleClick, item }: Props) => {
     return (
       <div>
         <img className={css.img} src={item.urls.small} alt={item.alt_description} 

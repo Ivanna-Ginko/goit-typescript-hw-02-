@@ -1,13 +1,22 @@
-import { Field, Formik, Form } from 'formik'
+import { Field, Formik, Form, FormikHelpers } from 'formik'
 import css from "./SearchBar.module.css"
 import toast, { Toaster } from 'react-hot-toast';
 
-const SearchBar = ({ handleChangeQuery }) => {
-    const initialValues = {
+type Props = {
+    handleChangeQuery: (search: string) => void ;
+}
+
+type initialValues = {
+  query: string;
+};
+
+
+const SearchBar = ({ handleChangeQuery }: Props) => {
+    const initialValues: initialValues = {
         query: '',
     }
 
-    const handleSubmit = (values, options) => {
+    const handleSubmit = (values: initialValues, options: FormikHelpers<initialValues>) => {
         const v = values.query.trim()
         if (!v) {
             toast.error('Empty query')
