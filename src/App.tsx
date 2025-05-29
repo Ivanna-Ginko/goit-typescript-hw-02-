@@ -9,6 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn'
 import ImageModal from './components/ImageModal/ImageModal'
 import type { Result } from './App.types';
+import AbortController from 'abort-controller'
 
 
 function App() {
